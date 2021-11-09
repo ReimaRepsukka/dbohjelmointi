@@ -22,7 +22,7 @@ function checkUser(PDO $dbcon, $username, $passwd){
     }
 }
 
-function creatUser($dbcon, $fname, $lname, $username, $passwd){
+function createUser(PDO $dbcon, $fname, $lname, $username, $passwd){
     try{
         $hash_pw = password_hash($passwd, PASSWORD_DEFAULT);
         $sql = "INSERT IGNORE INTO user VALUES (?,?,?,?)";
@@ -34,7 +34,7 @@ function creatUser($dbcon, $fname, $lname, $username, $passwd){
 }
 
 
-function createTable($con){
+function createTable(PDO $con){
     $sql = "CREATE TABLE IF NOT EXISTS user(
         first_name varchar(50) NOT NULL,
         last_name varchar(50) NOT NULL,
@@ -43,11 +43,9 @@ function createTable($con){
         PRIMARY KEY (username)
         )";
 
-
     $sql_add = "INSERT IGNORE INTO user VALUES ('Reima', 'Riihimäki','repe','eper'),
         ('John','Doe', 'doejohn', 'eod'),('Lisa','Simpson','ls','qwerty')";
 
-    
     try{
         
         $con->exec($sql);
