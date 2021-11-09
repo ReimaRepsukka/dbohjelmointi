@@ -1,18 +1,19 @@
 <?php
+session_start();
 require('headers.php');
 require('functions.php');
 
-$db = getDbConnection();
-createTable($db);
+// $db = getDbConnection();
+// createTable($db);
 
-$db->beginTransaction();
-//....exec
+//creatUser(getDbConnection(), "Kalle", "Koodari", "kallekoo", "vekkuli123");
+//creatUser(getDbConnection(), "Meija", "Mahtava", "meijuli", "oamk");
 
-$db->commit();
-
-//catch
-$db->rollBack();
-
-
+if( checkUser(getDbConnection(), "meijuli", "oamk") ){
+    $_SESSION["user"] = "meijuli";
+    echo "Oikea salasana!";
+}else{
+    echo "Väärä salasana";
+}
 
 ?>
