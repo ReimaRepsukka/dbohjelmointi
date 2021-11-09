@@ -12,8 +12,12 @@ function createTable($con){
     $sql_add = "INSERT IGNORE INTO user VALUES ('Reima', 'Riihimäki','repe','eper'),
         ('John','Doe', 'doejohn', 'eod'),('Lisa','Simpson','ls','qwerty')";
 
-    $con->exec($sql);
-    $con->exec($sql_add);   
+    try{
+        $con->exec($sql);
+        $con->exec($sql_add);   
+    }catch(PDOException $e){
+        echo '<br>'.$e->getMessage();
+    }
 }
 
 function getDbConnection(){
