@@ -3,10 +3,6 @@
 require('headers.php');
 require('functions.php');
 
-$db = getDbConnection();
-createTable($db);
-exit;
-
 //Tarkistetaan tuleeko palvelimelle basic login tiedot (Authorization: Basic asfkjsafdjsajflkasj)
 if( isset($_SERVER['PHP_AUTH_USER']) ){
     if(checkUser(getDbConnection(), $_SERVER['PHP_AUTH_USER'],$_SERVER["PHP_AUTH_PW"] )){
