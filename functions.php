@@ -56,7 +56,7 @@ function createUser(PDO $dbcon, $fname, $lname, $username, $passwd){
 /**
  * Luo ja palauttaa tietokantayhteyden.
  */
-function getDbConnection(){
+function createDbConnection(){
 
     try{
         $dbcon = new PDO('mysql:host=localhost;dbname=secdb', 'root', '');
@@ -68,28 +68,26 @@ function getDbConnection(){
     return $dbcon;
 }
 
-
-
 //Tätä koodia käytetty vain tietokantataulun luontiin.
 function createTable(PDO $con){
-    // $sql = "CREATE TABLE IF NOT EXISTS user(
-    //     first_name varchar(50) NOT NULL,
-    //     last_name varchar(50) NOT NULL,
-    //     username varchar(50) NOT NULL,
-    //     password varchar(150) NOT NULL,
-    //     PRIMARY KEY (username)
-    //     )";
+    $sql = "CREATE TABLE IF NOT EXISTS user(
+        first_name varchar(50) NOT NULL,
+        last_name varchar(50) NOT NULL,
+        username varchar(50) NOT NULL,
+        password varchar(150) NOT NULL,
+        PRIMARY KEY (username)
+        )";
 
-    // $sql_add = "INSERT IGNORE INTO user VALUES ('Reima', 'Riihimäki','repe','eper'),
-    //     ('John','Doe', 'doejohn', 'eod'),('Lisa','Simpson','ls','qwerty')";
+    try{   
+        $con->exec($sql);  
+    }catch(PDOException $e){
+        echo '<br>'.$e->getMessage();
+    }
 
-    // try{   
-    //     $con->exec($sql);  
-    //     $con->exec($sql_add);  
-    // }catch(PDOException $e){
-    //     $con->rollBack();
-    //     echo '<br>'.$e->getMessage();
-    // }
+    //Luodaan pari käyttäjää tietokantaan
+    createUser($con,'Reima','Riihimäki', 'repe', 'eper');
+    createUser($con,'John','Doe', 'johnny', 'abc1');
+    createUser($con,'Lisa','Simpson', 'cartoon', 'pass');
 }
 
 
