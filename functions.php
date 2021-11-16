@@ -90,6 +90,4 @@ function createTable(PDO $con){
     createUser($con,'Lisa','Simpson', 'cartoon', 'pass');
 }
 
-
-
 ?>

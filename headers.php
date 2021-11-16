@@ -1,4 +1,11 @@
 <?php
+include('fb/BeforeValidException.php');
+include('fb/ExpiredException.php');
+include('fb/JWK.php');
+include('fb/JWT.php');
+include('fb/Key.php');
+include('fb/SignatureInvalidException.php');
+
 // Allow from any origin
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
